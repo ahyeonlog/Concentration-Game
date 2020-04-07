@@ -36,20 +36,38 @@ class ViewController: UIViewController {
     //@IBOutlet > 지시문
     @IBOutlet weak var flipCountLabel: UILabel!
     
+    //모든 카드에 대해 touchCard 함수를 사용하기 위해 배열 생성
+    //ctrl + drag 로 연결 후
+    //Connection : Outlet Collection, UI에 있는 것들의 배열
+    //Type : UIButton, UIButton의 배열
+    //코드와 UI가 연결되어 있는 것의 이름을 수정할 땐 바로 수정하면 연결이 끊길 수 있기 때문에 Cmd + click > rename
+    @IBOutlet var cardButtons: [UIButton]!
+    
+    
     @IBAction func touchCard(_ sender: UIButton) {
         //flip card with emoji ghost on sender
         //영어처럼 읽히게 작명해야 함
         flipCount += 1
         //"\(변수)" 로 출력 가능
         //flipCountLabel.text = "Flips : \(flipCount)"
-        flipCard(withEmoji : "👻", on : sender)
+        //flipCard(withEmoji : "👻", on : sender)
+        
+        //var은 에러 뜸 swift에서 상수는 명시해주어야 함 > let으로 수정
+        //why? swift는 영어처럼 읽혀야 함
+        //let cardNumber equal cardNumber index of sender
+        //firstIndex의 return은 Int? > 옵셔널을 의미함
+        //옵셔널이란 설정된 것과 설정되지 않은 것 두가지 상태만 존재
+        //Swift에서 nil은 설정되지 않은 옵셔널의 상태를 의미한다.
+        let cardNumber = cardButtons.firstIndex(of: sender)!
+        print("cardNumber = \(cardNumber)")
     }
     
-    @IBAction func touchSecondCard(_ sender: UIButton) {
-        flipCount += 1
-        //flipCountLabel.text = "Flips : \(flipCount)"
-        flipCard(withEmoji: "🎃", on: sender)
-    }
+    //touchCard와 반복되는 코드 수정
+//    @IBAction func touchSecondCard(_ sender: UIButton) {
+//        flipCount += 1
+//        //flipCountLabel.text = "Flips : \(flipCount)"
+//        flipCard(withEmoji: "🎃", on: sender)
+//    }
     
     //flip card with emoji ghost on sender
     //영어처럼 읽히게 작명해야 함
