@@ -43,6 +43,8 @@ class ViewController: UIViewController {
     //코드와 UI가 연결되어 있는 것의 이름을 수정할 땐 바로 수정하면 연결이 끊길 수 있기 때문에 Cmd + click > rename
     @IBOutlet var cardButtons: [UIButton]!
     
+    //var emojiChoices: Array<String> = ["🎃","👻","🎃","👻"]
+    var emojiChoices = ["🎃","👻","🎃","👻"]
     
     @IBAction func touchCard(_ sender: UIButton) {
         //flip card with emoji ghost on sender
@@ -60,7 +62,8 @@ class ViewController: UIViewController {
         //Swift에서 nil은 설정되지 않은 옵셔널의 상태를 의미한다.
         //옵셔널을 정상적으로 사용하기 위한 방법 1. 해당 타입 뒤에 느낌표를 붙이거나 2.if let 조건문 활용
         if let cardNumber = cardButtons.firstIndex(of: sender){
-             print("cardNumber = \(cardNumber)")
+            // print("cardNumber = \(cardNumber)")
+            flipCard(withEmoji: emojiChoices[cardNumber], on: sender)
         } else {
             print("chosen card was not in cardButtons")
         }
