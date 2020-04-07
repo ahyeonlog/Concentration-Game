@@ -58,8 +58,13 @@ class ViewController: UIViewController {
         //firstIndex의 return은 Int? > 옵셔널을 의미함
         //옵셔널이란 설정된 것과 설정되지 않은 것 두가지 상태만 존재
         //Swift에서 nil은 설정되지 않은 옵셔널의 상태를 의미한다.
-        let cardNumber = cardButtons.firstIndex(of: sender)!
-        print("cardNumber = \(cardNumber)")
+        //옵셔널을 정상적으로 사용하기 위한 방법 1. 해당 타입 뒤에 느낌표를 붙이거나 2.if let 조건문 활용
+        if let cardNumber = cardButtons.firstIndex(of: sender){
+             print("cardNumber = \(cardNumber)")
+        } else {
+            print("chosen card was not in cardButtons")
+        }
+       
     }
     
     //touchCard와 반복되는 코드 수정
