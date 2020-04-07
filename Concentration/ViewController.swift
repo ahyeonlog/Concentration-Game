@@ -20,7 +20,16 @@ class ViewController: UIViewController {
     //var flipCount : Int = 0
     //swift는 강한 타입 추론 언어
     //option + click으로 설명 볼 수 있음 > Int 인 것 확인 가능
-    var flipCount = 0
+    var flipCount = 0{
+        //property observers
+        //속성이 변화하는 것을 감지함
+        //flipCount가 바뀔 때마다 didSet을 실행
+        //인스턴스변수와 UI의 싱크를 맞추기 위해 자주 사용
+        didSet{
+            flipCountLabel.text = "Flips : \(flipCount)"
+        }
+    }
+
     
     //타입이 UILabel, 이 경우 swift는 타입 추론 할 수 없음
     //weak, ! 가 뭔지는 다음주에 설명
@@ -32,13 +41,13 @@ class ViewController: UIViewController {
         //영어처럼 읽히게 작명해야 함
         flipCount += 1
         //"\(변수)" 로 출력 가능
-        flipCountLabel.text = "Flips : \(flipCount)"
+        //flipCountLabel.text = "Flips : \(flipCount)"
         flipCard(withEmoji : "👻", on : sender)
     }
     
     @IBAction func touchSecondCard(_ sender: UIButton) {
         flipCount += 1
-        flipCountLabel.text = "Flips : \(flipCount)"
+        //flipCountLabel.text = "Flips : \(flipCount)"
         flipCard(withEmoji: "🎃", on: sender)
     }
     
