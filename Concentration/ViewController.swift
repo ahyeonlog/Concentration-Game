@@ -21,7 +21,12 @@ class ViewController: UIViewController {
     //모든 클래스에서 모든 변수들이 초기화되면 인수가 없는 공짜 initializer을 가지게 된다
     //var game: Concentration = Concentration()
     //swift는 타입추론
-    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count + 1) / 2)
+    lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+    
+    //읽기전용 속성일때는  get키워드 안써도 됨
+    var numberOfPairsOfCards: Int {
+        return (cardButtons.count+1)/2
+    }
     
     
     //카드 뒤집은 횟수

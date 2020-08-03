@@ -19,10 +19,33 @@ class Concentration
     var cards = [Card]()
     
     //
-    var indexOfOneAndOnlyFaceUpCard: Int?
+    var indexOfOneAndOnlyFaceUpCard: Int? {
+        get {
+            var foundIndex: Int?
+            for index in cards.indices {
+                if cards[index].isFaceUp {
+                    //첫번째로 뒤집은 카드라면
+                    if foundIndex == nil {
+                        foundIndex = index
+                    } else {
+                        // 이미 앞면인 카드가 있다면 nil 리턴
+                        return nil
+                    }
+                }
+            }
+            return foundIndex
+        } set {
+            //아무것도 쓰지 않는다면 newValue가 지역변수가됨
+            for index in cards.indices {
+                // index가 어떤 값이라면 참 아니라면 거짓
+                cards[index].isFaceUp = (index == newValue)
+            }
+        }
+    }
     
     func chooseCard(at index: Int){
         if !cards[index].isMached {
+            // indexOfOneAndOnlyFaceUpCard : 계산 속성으로 요청될때마다 새롭게 계산함
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 //check if cards match
                 if cards[matchIndex].identifier == cards[index].identifier {
@@ -30,13 +53,7 @@ class Concentration
                     cards[index].isMached = true
                 }
                 cards[index].isFaceUp = true
-                indexOfOneAndOnlyFaceUpCard = nil
             } else {
-                //either no cards or 2 cards are face up
-                for flipDownIndex in cards.indices {
-                    cards[flipDownIndex].isFaceUp = false
-                }
-                cards[index].isFaceUp = true
                 indexOfOneAndOnlyFaceUpCard = index
             }
         }
