@@ -21,8 +21,9 @@ class ViewController: UIViewController {
     //모든 클래스에서 모든 변수들이 초기화되면 인수가 없는 공짜 initializer을 가지게 된다
     //var game: Concentration = Concentration()
     //swift는 타입추론
-    lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
+    private lazy var game = Concentration(numberOfPairsOfCards: numberOfPairsOfCards)
     
+    //카드 수는 물을 수 있지만 set은 불가능
     //읽기전용 속성일때는  get키워드 안써도 됨
     var numberOfPairsOfCards: Int {
         return (cardButtons.count+1)/2
@@ -34,7 +35,7 @@ class ViewController: UIViewController {
     //var flipCount : Int = 0
     //swift는 강한 타입 추론 언어
     //option + click으로 설명 볼 수 있음 > Int 인 것 확인 가능
-    var flipCount = 0{
+    private(set) var flipCount = 0{
         //property observers
         //속성이 변화하는 것을 감지함
         //flipCount가 바뀔 때마다 didSet을 실행
@@ -48,16 +49,16 @@ class ViewController: UIViewController {
     //타입이 UILabel, 이 경우 swift는 타입 추론 할 수 없음
     //weak, ! 가 뭔지는 다음주에 설명
     //@IBOutlet > 지시문
-    @IBOutlet weak var flipCountLabel: UILabel!
+    @IBOutlet weak private var flipCountLabel: UILabel!
     
     //모든 카드에 대해 touchCard 함수를 사용하기 위해 배열 생성
     //ctrl + drag 로 연결 후
     //Connection : Outlet Collection, UI에 있는 것들의 배열
     //Type : UIButton, UIButton의 배열
     //코드와 UI가 연결되어 있는 것의 이름을 수정할 땐 바로 수정하면 연결이 끊길 수 있기 때문에 Cmd + click > rename
-    @IBOutlet var cardButtons: [UIButton]!
+    @IBOutlet private var cardButtons: [UIButton]!
     
-    @IBAction func touchCard(_ sender: UIButton) {
+    @IBAction private func touchCard(_ sender: UIButton) {
         //flip card with emoji ghost on sender
         //영어처럼 읽히게 작명해야 함
         flipCount += 1
@@ -87,7 +88,7 @@ class ViewController: UIViewController {
        
     }
     
-    func updateViewFromModel() {
+    private func updateViewFromModel() {
         for index in cardButtons.indices {
             let button = cardButtons[index]
             let card = game.cards[index]
@@ -103,12 +104,12 @@ class ViewController: UIViewController {
     
     
     //var emojiChoices: Array<String> = ["🎃","👻","🎃","👻"]
-    var emojiChoices = ["🤡","👻","🎃","💀", "🧟‍♀️", "🕷", "🍭", "🍬"]
+    private var emojiChoices = ["🤡","👻","🎃","💀", "🧟‍♀️", "🕷", "🍭", "🍬"]
     
     //var emoji = Dictionary<Int, String>()
-    var emoji = [Int:String]()
+    private var emoji = [Int:String]()
     
-    func emoji(for card: Card) -> String {
+    private func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil, emojiChoices.count > 0 {
             let randomIndex = Int(arc4random_uniform(UInt32(emojiChoices.count)))
             emoji[card.identifier] = emojiChoices.remove(at: randomIndex)

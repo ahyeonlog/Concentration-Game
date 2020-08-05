@@ -16,10 +16,10 @@ class Concentration
     
     
     //var cards = Array<Card>()
-    var cards = [Card]()
+    private(set) var cards = [Card]()
     
     //
-    var indexOfOneAndOnlyFaceUpCard: Int? {
+    private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             var foundIndex: Int?
             for index in cards.indices {
@@ -44,6 +44,7 @@ class Concentration
     }
     
     func chooseCard(at index: Int){
+        assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): choose index not in the cards")
         if !cards[index].isMached {
             // indexOfOneAndOnlyFaceUpCard : 계산 속성으로 요청될때마다 새롭게 계산함
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
@@ -66,6 +67,7 @@ class Concentration
     }
     
     init(numberOfPairsOfCards : Int){
+        assert(numberOfPairsOfCards > 0, "Concentration.init(at: \(numberOfPairsOfCards)): you must have at least one pair of cards")
         //구조체는 클래스와 다르게 모든 변수를 초기화할 수 있는 공짜 이니셜라이저를 받는다
         //c.f) 클래스는 인수가 없는 이니셜라이저 받음
         //for문의 in 뒤에는 시퀀스 사용

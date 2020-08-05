@@ -27,10 +27,10 @@ struct Card
     var identifier: Int
     
     //각각의 카드에 저장되는 변수가 아니라 카드 타입에 저장됨
-    static var identifierFactory = 0
+    private static var identifierFactory = 0
     
     //stactic 함수는 Card 타입에게만 메세지를 보냄
-    static func getUniqueIdentifier() -> Int {
+    private static func getUniqueIdentifier() -> Int {
         //Card.identifierFactory += 1
         //return Card.identifierFactory
         //정적 메소드 안이기때문에 Card.~~ 로 작성하지 않아도 됨
