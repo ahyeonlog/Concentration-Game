@@ -18,13 +18,18 @@ import Foundation
 //UI와 독립적이기 때문에 이미지, 색, 이모티콘 같은 것이 있으면 안됨
 //이것들은 카드를 "어떻게" 보여주는지와 관련된 내용이다.
 
-struct Card
+struct Card: Hashable
 {
     //앞, 뒷면 구분
     var isFaceUp = false
     var isMached = false
     //식별자
-    var identifier: Int
+    private var identifier: Int
+    
+    
+    static func ==(lhs: Card, rhs: Card) -> Bool {
+        return lhs.identifier == rhs.identifier
+    }
     
     //각각의 카드에 저장되는 변수가 아니라 카드 타입에 저장됨
     private static var identifierFactory = 0

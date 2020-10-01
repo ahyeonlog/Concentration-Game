@@ -49,7 +49,7 @@ class Concentration
             // indexOfOneAndOnlyFaceUpCard : 계산 속성으로 요청될때마다 새롭게 계산함
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
                 //check if cards match
-                if cards[matchIndex].identifier == cards[index].identifier {
+                if cards[matchIndex] == cards[index] {
                     cards[matchIndex].isMached = true
                     cards[index].isMached = true
                 }
